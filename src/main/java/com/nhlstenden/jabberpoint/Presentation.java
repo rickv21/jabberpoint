@@ -1,5 +1,6 @@
-import java.util.ArrayList;
+package com.nhlstenden.jabberpoint;
 
+import java.util.ArrayList;
 
 /**
  * <p>Presentations keeps track of the slides in a presentation.</p>
@@ -50,7 +51,7 @@ public class Presentation {
 		return currentSlideNumber;
 	}
 
-	//Change the current slide number and report it the the window
+	//Change the current slide number and report it to the window
 	public void setSlideNumber(int number) {
 		currentSlideNumber = number;
 		if (slideViewComponent != null) {

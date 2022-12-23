@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jabberpoint:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jabberpoint_jar</output-path>
+    <root id="archive" name="jabberpoint.jar">
+      <element id="module-output" name="jabberpoint" />
+    </root>
+  </artifact>
+</component>
