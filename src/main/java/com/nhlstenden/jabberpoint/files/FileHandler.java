@@ -2,6 +2,7 @@ package com.nhlstenden.jabberpoint.files;
 
 import com.nhlstenden.jabberpoint.Presentation;
 import com.nhlstenden.jabberpoint.files.loading.FileLoader;
+import com.nhlstenden.jabberpoint.files.loading.JSONLoader;
 import com.nhlstenden.jabberpoint.files.loading.XMLLoader;
 import com.nhlstenden.jabberpoint.files.saving.FileSaver;
 import com.nhlstenden.jabberpoint.files.saving.XMLSaver;
@@ -83,6 +84,7 @@ public class FileHandler {
 
     private void loadLoaders(){
         fileLoaders.add(new XMLLoader());
+        fileLoaders.add(new JSONLoader());
     }
 
     private void loadSavers(){

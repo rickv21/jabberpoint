@@ -18,8 +18,8 @@ import com.nhlstenden.jabberpoint.files.loading.DemoLoader;
  */
 
 public class JabberPoint {
-	protected static final String JAB_NAME = "Jabberpoint";
-	protected static final String JAB_VERSION = "1.7 - OU version";
+	public static final String JAB_NAME = "Jabberpoint";
+	public static final String JAB_VERSION = "1.7 - OU version";
 
 	/** The main program */
 	public static void main(String[] argv) {
@@ -33,7 +33,5 @@ public class JabberPoint {
 		}
 
 		presentation.setSlideNumber(0);
-
-
 	}
 }

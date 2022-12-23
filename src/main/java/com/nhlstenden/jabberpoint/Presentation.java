@@ -1,6 +1,7 @@
 package com.nhlstenden.jabberpoint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>Presentations keeps track of the slides in a presentation.</p>
@@ -16,11 +17,12 @@ import java.util.ArrayList;
 
 public class Presentation {
 	private String showTitle; //The title of the presentation
-	private ArrayList<Slide> showList = null; //An ArrayList with slides
-	private int currentSlideNumber = 0; //The number of the current slide
-	private SlideViewerComponent slideViewComponent = null; //The view component of the slides
+	private List<Slide> showList; //An ArrayList with slides
+	private int currentSlideNumber; //The number of the current slide
+	private SlideViewerComponent slideViewComponent; //The view component of the slides
 
 	public Presentation() {
+		showTitle = "";
 		slideViewComponent = null;
 		clear();
 	}
@@ -75,7 +77,7 @@ public class Presentation {
 
 	//Remove the presentation
 	void clear() {
-		showList = new ArrayList<Slide>();
+		showList = new ArrayList<>();
 		setSlideNumber(-1);
 	}
 
@@ -89,7 +91,7 @@ public class Presentation {
 		if (number < 0 || number >= getSize()){
 			return null;
 	    }
-			return (Slide)showList.get(number);
+			return showList.get(number);
 	}
 
 	//Return the current slide

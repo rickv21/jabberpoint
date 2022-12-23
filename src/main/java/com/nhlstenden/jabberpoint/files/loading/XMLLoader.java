@@ -25,7 +25,6 @@ public class XMLLoader extends FileLoader{
 
     @Override
     public void loadPresentation(Presentation presentation, File file) {
-        int slideNumber, itemNumber, max = 0, maxItems = 0;
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(file); //Create a JDOM document
@@ -33,23 +32,23 @@ public class XMLLoader extends FileLoader{
             presentation.setTitle(getTitle(doc, "showtitle"));
 
             NodeList slides = doc.getElementsByTagName("slide");
-            max = slides.getLength();
-            for (slideNumber = 0; slideNumber < max; slideNumber++) {
+            int max = slides.getLength();
+            for (int slideNumber = 0; slideNumber < max; slideNumber++) {
                 Element xmlSlide = (Element) slides.item(slideNumber);
                 Slide slide = new Slide();
                 slide.setTitle(getTitle(xmlSlide, "title"));
                 presentation.append(slide);
 
                 NodeList slideItems = xmlSlide.getElementsByTagName("item");
-                maxItems = slideItems.getLength();
-                for (itemNumber = 0; itemNumber < maxItems; itemNumber++) {
+                int maxItems = slideItems.getLength();
+                for (int itemNumber = 0; itemNumber < maxItems; itemNumber++) {
                     Element item = (Element) slideItems.item(itemNumber);
                     loadSlideItem(slide, item);
                 }
             }
         }
         catch (IOException iox) {
-            System.err.println(iox.toString());
+            iox.printStackTrace();
         }
         catch (SAXException sax) {
             System.err.println(sax.getMessage());

@@ -18,8 +18,7 @@ import javax.swing.JFrame;
 
 public class SlideViewerFrame extends JFrame {
 	private static final long serialVersionUID = 3227L;
-	
-	private static final String JABTITLE = "Jabberpoint 1.6 - OU";
+
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
 	
@@ -30,11 +29,12 @@ public class SlideViewerFrame extends JFrame {
 		setupWindow(slideViewerComponent, presentation);
 	}
 
-//Setup the GUI
+	//Setup the GUI
 	public void setupWindow(SlideViewerComponent 
 			slideViewerComponent, Presentation presentation) {
-		setTitle(JABTITLE);
+		setTitle(JabberPoint.JAB_NAME + " " + JabberPoint.JAB_VERSION);
 		addWindowListener(new WindowAdapter() {
+				@Override
 				public void windowClosing(WindowEvent e) {
 					System.exit(0);
 				}

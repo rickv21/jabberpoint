@@ -22,7 +22,7 @@ public class Slide {
 	protected Vector<SlideItem> items; //The SlideItems are kept in a vector
 
 	public Slide() {
-		items = new Vector<SlideItem>();
+		items = new Vector<>();
 	}
 
 	//Add a SlideItem
@@ -47,7 +47,7 @@ public class Slide {
 
 	//Returns the SlideItem
 	public SlideItem getSlideItem(int number) {
-		return (SlideItem)items.elementAt(number);
+		return items.elementAt(number);
 	}
 
 	//Return all the SlideItems in a vector

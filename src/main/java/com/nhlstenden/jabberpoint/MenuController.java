@@ -20,8 +20,8 @@ import java.io.IOException;
  */
 public class MenuController extends MenuBar {
 	
-	private Frame parent; //The frame, only used as parent for the Dialogs
-	private Presentation presentation; //Commands are given to the presentation
+	private final Frame parent; //The frame, only used as parent for the Dialogs
+	private final Presentation presentation; //Commands are given to the presentation
 	
 	private static final long serialVersionUID = 227L;
 	

@@ -22,9 +22,9 @@ import javax.swing.JFrame;
 public class SlideViewerComponent extends JComponent {
 		
 	private Slide slide; //The current slide
-	private Font labelFont = null; //The font for labels
-	private Presentation presentation = null; //The presentation
-	private JFrame frame = null;
+	private final Font labelFont; //The font for labels
+	private Presentation presentation; //The presentation
+	private final JFrame frame;
 	
 	private static final long serialVersionUID = 227L;
 	
@@ -43,6 +43,7 @@ public class SlideViewerComponent extends JComponent {
 		this.frame = frame;
 	}
 
+	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
 	}
@@ -58,7 +59,8 @@ public class SlideViewerComponent extends JComponent {
 		frame.setTitle(presentation.getTitle());
 	}
 
-//Draw the slide
+	//Draw the slide
+	@Override
 	public void paintComponent(Graphics g) {
 		g.setColor(BGCOLOR);
 		g.fillRect(0, 0, getSize().width, getSize().height);
