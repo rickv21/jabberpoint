@@ -51,4 +51,9 @@ public class DemoLoader extends FileLoader {
     public String getExtension() {
         return null;
     }
+
+    @Override
+    public char getShortcut() {
+        return 0;
+    }
 }

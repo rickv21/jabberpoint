@@ -75,4 +75,9 @@ public class JSONLoader extends FileLoader{
             }
         }
     }
+
+    @Override
+    public char getShortcut() {
+        return 'j';
+    }
 }

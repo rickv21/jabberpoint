@@ -6,6 +6,7 @@ import com.nhlstenden.jabberpoint.files.saving.FileSaver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -105,11 +106,11 @@ public class MenuController extends MenuBar {
 
 	public MenuItem mkOpenMenuItem() {
 		Menu menu = new Menu(OPEN);
-		menu.setShortcut(new MenuShortcut(OPEN.charAt(0)));
 		FileHandler fileHandler = new FileHandler();
 
 		for(FileLoader loader : fileHandler.getFileLoaders()){
-			MenuItem item = new MenuItem(" ." + loader.getExtension().toUpperCase());
+			MenuItem item = new MenuItem(" ." + loader.getExtension().toUpperCase(),
+					new MenuShortcut(KeyEvent.getExtendedKeyCodeForChar(loader.getShortcut())));
 			item.addActionListener(e -> {
 				presentation.clear();
 				File file = new File(TESTFILE + "." + loader.getExtension());
@@ -130,11 +131,11 @@ public class MenuController extends MenuBar {
 
 	public MenuItem mkSaveMenuItem() {
 		Menu menu = new Menu(SAVE);
-		menu.setShortcut(new MenuShortcut(SAVE.charAt(0)));
 		FileHandler fileHandler = new FileHandler();
 
 		for(FileSaver saver : fileHandler.getFileSavers()){
-			MenuItem item = new MenuItem(" ." + saver.getExtension().toUpperCase());
+			MenuItem item = new MenuItem(" ." + saver.getExtension().toUpperCase(),
+					new MenuShortcut(KeyEvent.getExtendedKeyCodeForChar(saver.getShortcut())));
 
 			item.addActionListener(e -> {
 				try {

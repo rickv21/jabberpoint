@@ -52,4 +52,9 @@ public class XMLSaver extends FileSaver{
     public String getExtension() {
         return "xml";
     }
+
+    @Override
+    public char getShortcut() {
+        return 's';
+    }
 }

@@ -19,11 +19,6 @@ import java.io.IOException;
 public class XMLLoader extends FileLoader{
 
     @Override
-    public String getExtension() {
-        return "xml";
-    }
-
-    @Override
     public void loadPresentation(Presentation presentation, File file) {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -87,5 +82,15 @@ public class XMLLoader extends FileLoader{
                 System.err.println("Unknown Element type");
             }
         }
+    }
+
+    @Override
+    public String getExtension() {
+        return "xml";
+    }
+
+    @Override
+    public char getShortcut() {
+        return 'o';
     }
 }
