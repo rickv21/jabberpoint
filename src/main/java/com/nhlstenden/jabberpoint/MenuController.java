@@ -33,26 +33,29 @@ public class MenuController extends MenuBar {
 	protected static final String HELP = "Help";
 	protected static final String NEW = "New";
 	protected static final String NEXT = "Next";
-	protected static final String OPEN = "Open...";
+	protected static final String OPEN = "Open";
 	protected static final String PAGENR = "Page number?";
 	protected static final String PREV = "Prev";
-	protected static final String SAVE = "Save as...";
+	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
-	protected static final String SAVE_OVERWRITE_CONFIRM_TITLE= "Save confirmation";
-	protected static final String SAVE_OVERWRITE_CONFIRM= "The file {0} already exists, do you want to overwrite it?";
-	protected static final String FILE_NOT_EXIST = "The file {0} does not exist.";
 	protected static final String SLIDE_INPUT_ERROR_TITLE = "Invalid slide input";
 	protected static final String SLIDE_INPUT_ERROR = "The input must be more than 0 and not be more than the amount of slides";
 	
 	protected static final String TESTFILE = "testPresentation";
 	protected static final String SAVEFILE = "savedPresentation";
 
-	public MenuController(Frame frame, Presentation pres) {
+	/**
+	 * Handles the Menu's on top of the screen.
+	 *
+	 * @param frame The frame of the application.
+	 * @param pres The current presentation.
+	 */
+	public MenuController(SlideViewerFrame frame, Presentation pres) {
 		parent = frame;
 		presentation = pres;
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
-		fileMenu.add(mkOpenMenuItem());
+		fileMenu.add(mkOpenMenuItem(fileMenu));
 
 		fileMenu.add(menuItem = mkMenuItem(NEW));
 		menuItem.addActionListener(actionEvent -> {
@@ -60,11 +63,11 @@ public class MenuController extends MenuBar {
 			parent.repaint();
 		});
 
-		fileMenu.add(mkSaveMenuItem());
+		fileMenu.add(mkSaveMenuItem(fileMenu));
 		fileMenu.addSeparator();
 
 		fileMenu.add(menuItem = mkMenuItem(EXIT));
-		menuItem.addActionListener(actionEvent -> presentation.exit(0));
+		menuItem.addActionListener(actionEvent -> frame.exit(0));
 		add(fileMenu);
 
 		Menu viewMenu = new Menu(VIEW);
@@ -99,26 +102,43 @@ public class MenuController extends MenuBar {
 		setHelpMenu(helpMenu);		//Needed for portability (Motif, etc.).
 	}
 
-//Creating a menu-item
+	/**
+	 * Creates a normal MenuItem.
+	 *
+	 * @param name The text of the Menu Item.
+	 * @return The newly created MenuItem.
+	 */
 	public MenuItem mkMenuItem(String name) {
 		return new MenuItem(name, new MenuShortcut(name.charAt(0)));
 	}
 
-	public MenuItem mkOpenMenuItem() {
-		Menu menu = new Menu(OPEN);
+	/**
+	 * Creates a MenuItem with a file open action.
+	 *
+	 * @param fileMenu The existing file menu dropdown.
+	 * @return The newly created MenuItem.
+	 */
+	public MenuItem mkOpenMenuItem(Menu fileMenu) {
+		Menu menu;
 		FileHandler fileHandler = new FileHandler();
 
+		//Different behavior if more than 1 loader exists.
+		if(fileHandler.getFileLoaders().size() > 1){
+			menu = new Menu(OPEN);
+		} else {
+			menu = fileMenu;
+		}
+
+		//Loop through all loaders.
 		for(FileLoader loader : fileHandler.getFileLoaders()){
-			MenuItem item = new MenuItem(" ." + loader.getExtension().toUpperCase(),
+			//Different text if more than 1 loader exists.
+			MenuItem item = new MenuItem(fileHandler.getFileSavers().size() > 1 ? " ." + loader.getExtension().toUpperCase() : OPEN,
 					new MenuShortcut(KeyEvent.getExtendedKeyCodeForChar(loader.getShortcut())));
+
+			//Add loader action.
 			item.addActionListener(e -> {
 				presentation.clear();
 				File file = new File(TESTFILE + "." + loader.getExtension());
-				if(!file.exists()){
-					JOptionPane.showMessageDialog(parent,
-							FILE_NOT_EXIST.replace("{0}", TESTFILE + "." + loader.getExtension()), "IO Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
 
 				loader.loadPresentation(presentation, file);
 				presentation.setSlideNumber(0);
@@ -129,30 +149,39 @@ public class MenuController extends MenuBar {
 		return menu;
 	}
 
-	public MenuItem mkSaveMenuItem() {
-		Menu menu = new Menu(SAVE);
+	/**
+	 * Creates a MenuItem with a file save action.
+	 *
+	 * @param fileMenu The existing file menu dropdown.
+	 * @return The newly created MenuItem.
+	 */
+	public MenuItem mkSaveMenuItem(Menu fileMenu) {
+		Menu menu;
 		FileHandler fileHandler = new FileHandler();
 
+		//Different behavior if more than 1 saver exists.
+		if(fileHandler.getFileSavers().size() > 1){
+			menu = new Menu(SAVE);
+		} else {
+			menu = fileMenu;
+		}
+
+		//Loop through all savers.
 		for(FileSaver saver : fileHandler.getFileSavers()){
-			MenuItem item = new MenuItem(" ." + saver.getExtension().toUpperCase(),
+			//Different text if more than 1 saver exists.
+			MenuItem item = new MenuItem(fileHandler.getFileSavers().size() > 1 ? " ." + saver.getExtension().toUpperCase() : SAVE,
 					new MenuShortcut(KeyEvent.getExtendedKeyCodeForChar(saver.getShortcut())));
 
+			//Add save action.
 			item.addActionListener(e -> {
 				try {
 					File file = new File(SAVEFILE + "." + saver.getExtension());
-					if (file.exists()) {
-						int answer = JOptionPane.showConfirmDialog(parent, SAVE_OVERWRITE_CONFIRM.replace("{0}", SAVEFILE + "." + saver.getExtension()),
-								SAVE_OVERWRITE_CONFIRM_TITLE, JOptionPane.YES_NO_OPTION);
-						if (answer != JOptionPane.YES_OPTION) {
-							return;
-						}
-					} else {
+					if (!file.exists()) {
 						file.createNewFile();
 					}
 					saver.savePresentation(presentation, file);
 				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, "IO Error" + exc,
-							"Save Error", JOptionPane.ERROR_MESSAGE);
+					exc.printStackTrace();
 				}
 			});
 			menu.add(item);

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
 <presentation>
-<showtitle>XML-Based Presentation for Jabberpoint</showtitle>
+<showtitle>JSON-Based Presentation for Jabberpoint</showtitle>
 <slide>
-<title>JabberPoint XML-Demo</title>
-<item kind="text" level="1">Welcome to JabberPoint</item>
+<title>JabberPoint JSON-Demo</title>
+<item kind="text" level="1">Welcome to Jabberpoint</item>
 <item kind="text" level="2">Copyright (c) 1996-2000 Ian Darwin</item>
 <item kind="text" level="2">Rewritten by</item>
 <item kind="text" level="2">Gert Florijn, Mark van Elswijk, Marc Evers</item>
@@ -28,7 +28,7 @@
 <item kind="image" level="2">logo_nhlstenden.jpg</item>
 <item kind="text" level="1"> </item>
 <item kind="text" level="1">The exercise is developed by the SERC</item>
-<item kind="text" level="1">in collaboration with the Open university </item>
+<item kind="text" level="1">in collaboration with the Open university</item>
 <item kind="text" level="1"> </item>
 <item kind="image" level="2">serclogo_fc.jpg</item>
 </slide>
@@ -44,7 +44,7 @@
 <slide>
 <title>Last slide</title>
 <item kind="text" level="1">Navigation can also be done via the menu</item>
-<item kind="text" level="2">Load a presentation: File->Open</item>
+<item kind="text" level="2">Load a presentation: File->Open-><type></item>
 <item kind="text" level="1"> </item>
 <item kind="text" level="1">This is the end of the presentation.</item>
 <item kind="image" level="1">JabberPoint.jpg</item>

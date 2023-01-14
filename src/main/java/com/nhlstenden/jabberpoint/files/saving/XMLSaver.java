@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Vector;
+import java.util.List;
 
 public class XMLSaver extends FileSaver{
 
@@ -23,20 +23,17 @@ public class XMLSaver extends FileSaver{
             Slide slide = presentation.getSlide(slideNumber);
             out.println("<slide>");
             out.println("<title>" + slide.getTitle() + "</title>");
-            Vector<SlideItem> slideItems = slide.getSlideItems();
-            for (int itemNumber = 0; itemNumber<slideItems.size(); itemNumber++) {
-                SlideItem slideItem = (SlideItem) slideItems.elementAt(itemNumber);
+            List<SlideItem> slideItems = slide.getSlideItems();
+            for (SlideItem slideItem : slideItems) {
                 out.print("<item kind=");
                 if (slideItem instanceof TextItem) {
                     out.print("\"text\" level=\"" + slideItem.getLevel() + "\">");
-                    out.print( ( (TextItem) slideItem).getText());
-                }
-                else {
+                    out.print(((TextItem) slideItem).getText());
+                } else {
                     if (slideItem instanceof BitmapItem) {
                         out.print("\"image\" level=\"" + slideItem.getLevel() + "\">");
-                        out.print( ( (BitmapItem) slideItem).getName());
-                    }
-                    else {
+                        out.print(((BitmapItem) slideItem).getName());
+                    } else {
                         System.out.println("Ignoring " + slideItem);
                     }
                 }

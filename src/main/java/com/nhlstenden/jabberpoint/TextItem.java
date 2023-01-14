@@ -1,5 +1,7 @@
 package com.nhlstenden.jabberpoint;
 
+import com.nhlstenden.jabberpoint.style.LevelStyle;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -43,15 +45,14 @@ public class TextItem extends SlideItem {
 	}
 
 //Returns the AttributedString for the Item
-	public AttributedString getAttributedString(Style style, float scale) {
+	public AttributedString getAttributedString(LevelStyle style, float scale) {
 		AttributedString attrStr = new AttributedString(getText());
 		attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
 		return attrStr;
 	}
 
 //Returns the bounding box of an Item
-	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, 
-			float scale, Style myStyle) {
+	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, LevelStyle myStyle) {
 		List<TextLayout> layouts = getLayouts(g, myStyle, scale);
 		int xsize = 0, ysize = (int) (myStyle.getLeading() * scale);
 		for (TextLayout layout : layouts) {
@@ -68,8 +69,7 @@ public class TextItem extends SlideItem {
 	}
 
 //Draws the item
-	public void draw(int x, int y, float scale, Graphics g, 
-			Style myStyle, ImageObserver o) {
+	public void draw(int x, int y, float scale, Graphics g, LevelStyle myStyle, ImageObserver o) {
 		if (text == null || text.length() == 0) {
 			return;
 		}
@@ -85,7 +85,7 @@ public class TextItem extends SlideItem {
 		}
 	  }
 
-	private List<TextLayout> getLayouts(Graphics g, Style s, float scale) {
+	private List<TextLayout> getLayouts(Graphics g, LevelStyle s, float scale) {
 		List<TextLayout> layouts = new ArrayList<>();
 		AttributedString attrStr = getAttributedString(s, scale);
     	Graphics2D g2d = (Graphics2D) g;

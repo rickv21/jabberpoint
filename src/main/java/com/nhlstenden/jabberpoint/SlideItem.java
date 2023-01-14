@@ -1,5 +1,7 @@
 package com.nhlstenden.jabberpoint;
 
+import com.nhlstenden.jabberpoint.style.LevelStyle;
+
 import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
@@ -26,16 +28,21 @@ public abstract class SlideItem {
 		this(0);
 	}
 
-//Returns the level
 	public int getLevel() {
 		return level;
 	}
 
-//Returns the bounding box
-	public abstract Rectangle getBoundingBox(Graphics g, 
-			ImageObserver observer, float scale, Style style);
+	public abstract Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, LevelStyle style);
 
-//Draws the item
-	public abstract void draw(int x, int y, float scale, 
-			Graphics g, Style style, ImageObserver observer);
+	/**
+	 * Draws this SlideItem.
+	 *
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @param scale The scale of the SlideItem.
+	 * @param g The Graphics object.
+	 * @param style The style for the SlideItem.
+	 * @param observer The observer for loading the SlideItem.
+	 */
+	public abstract void draw(int x, int y, float scale, Graphics g, LevelStyle style, ImageObserver observer);
 }

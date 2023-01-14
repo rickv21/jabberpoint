@@ -1,5 +1,7 @@
 package com.nhlstenden.jabberpoint;
 
+import com.nhlstenden.jabberpoint.style.LevelStyle;
+
 import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -42,7 +44,7 @@ public class BitmapItem extends SlideItem {
 	}
 
 	//An empty bitmap item
-	public BitmapItem() {
+	public BitmapItem(LevelStyle levelStyle) {
 		this(0, null);
 	}
 
@@ -52,7 +54,7 @@ public class BitmapItem extends SlideItem {
 	}
 
 	//Returns the bounding box of the image
-	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style myStyle) {
+	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, LevelStyle myStyle) {
 		return new Rectangle((int) (myStyle.getIndent() * scale), 0,
 				(int) (bufferedImage.getWidth(observer) * scale),
 				((int) (myStyle.getLeading() * scale)) +
@@ -60,7 +62,7 @@ public class BitmapItem extends SlideItem {
 	}
 
 	//Draws the image
-	public void draw(int x, int y, float scale, Graphics g, Style myStyle, ImageObserver observer) {
+	public void draw(int x, int y, float scale, Graphics g, LevelStyle myStyle, ImageObserver observer) {
 		int width = x + (int) (myStyle.getIndent() * scale);
 		int height = y + (int) (myStyle.getLeading() * scale);
 		g.drawImage(bufferedImage, width, height,(int) (bufferedImage.getWidth(observer)*scale),

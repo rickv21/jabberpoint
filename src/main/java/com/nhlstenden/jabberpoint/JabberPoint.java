@@ -2,6 +2,7 @@ package com.nhlstenden.jabberpoint;
 
 import com.nhlstenden.jabberpoint.files.FileHandler;
 import com.nhlstenden.jabberpoint.files.loading.DemoLoader;
+import com.nhlstenden.jabberpoint.style.Style;
 
 /** JabberPoint Main Program
  * <p>This program is distributed under the terms of the accompanying
@@ -23,7 +24,6 @@ public class JabberPoint {
 
 	/** The main program */
 	public static void main(String[] argv) {
-		Style.createStyles();
 		Presentation presentation = new Presentation();
 		new SlideViewerFrame(JAB_NAME + " " + JAB_VERSION, presentation);
 		if (argv.length == 0) { //a demo presentation

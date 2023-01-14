@@ -29,9 +29,13 @@ public class SlideViewerFrame extends JFrame {
 		setupWindow(slideViewerComponent, presentation);
 	}
 
-	//Setup the GUI
-	public void setupWindow(SlideViewerComponent 
-			slideViewerComponent, Presentation presentation) {
+	/**
+	 * Sets up the GUI.
+	 *
+	 * @param slideViewerComponent The view component.
+	 * @param presentation The current presentation
+	 */
+	public void setupWindow(SlideViewerComponent slideViewerComponent, Presentation presentation) {
 		setTitle(JabberPoint.JAB_NAME + " " + JabberPoint.JAB_VERSION);
 		addWindowListener(new WindowAdapter() {
 				@Override
@@ -44,5 +48,14 @@ public class SlideViewerFrame extends JFrame {
 		setMenuBar(new MenuController(this, presentation));	//Add another controller
 		setSize(new Dimension(WIDTH, HEIGHT)); //Same sizes a slide has
 		setVisible(true);
+	}
+
+	/**
+	 * Exists the program.
+	 *
+	 * @param exitCode The exit code.
+	 */
+	public void exit(int exitCode) {
+		System.exit(exitCode);
 	}
 }

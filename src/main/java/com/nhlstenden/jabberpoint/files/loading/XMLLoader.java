@@ -4,6 +4,7 @@ import com.nhlstenden.jabberpoint.BitmapItem;
 import com.nhlstenden.jabberpoint.Presentation;
 import com.nhlstenden.jabberpoint.Slide;
 import com.nhlstenden.jabberpoint.TextItem;
+import com.nhlstenden.jabberpoint.style.DefaultStyle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -30,7 +31,7 @@ public class XMLLoader extends FileLoader{
             int max = slides.getLength();
             for (int slideNumber = 0; slideNumber < max; slideNumber++) {
                 Element xmlSlide = (Element) slides.item(slideNumber);
-                Slide slide = new Slide();
+                Slide slide = new Slide(new DefaultStyle());
                 slide.setTitle(getTitle(xmlSlide, "title"));
                 presentation.append(slide);
 

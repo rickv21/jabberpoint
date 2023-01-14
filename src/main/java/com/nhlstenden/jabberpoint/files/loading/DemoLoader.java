@@ -1,8 +1,8 @@
 package com.nhlstenden.jabberpoint.files.loading;
 
-import com.nhlstenden.jabberpoint.BitmapItem;
-import com.nhlstenden.jabberpoint.Presentation;
-import com.nhlstenden.jabberpoint.Slide;
+import com.nhlstenden.jabberpoint.*;
+import com.nhlstenden.jabberpoint.style.DefaultStyle;
+import com.nhlstenden.jabberpoint.style.Style;
 
 import java.io.File;
 
@@ -11,8 +11,9 @@ public class DemoLoader extends FileLoader {
     @Override
     public void loadPresentation(Presentation presentation, File file) {
         presentation.setTitle("Demo Presentation");
+        Style style = new DefaultStyle();
         Slide slide;
-        slide = new Slide();
+        slide = new Slide(style);
         slide.setTitle("JabberPoint");
         slide.append(1, "The Java prestentation tool");
         slide.append(2, "Copyright (c) 1996-2000: Ian Darwin");
@@ -26,7 +27,7 @@ public class DemoLoader extends FileLoader {
         slide.append(3, "Quit: q or Q");
         presentation.append(slide);
 
-        slide = new Slide();
+        slide = new Slide(style);
         slide.setTitle("Demonstration of levels and styles");
         slide.append(1, "Level 1");
         slide.append(2, "Level 2");
@@ -37,7 +38,7 @@ public class DemoLoader extends FileLoader {
         slide.append(4, "And this is level 4");
         presentation.append(slide);
 
-        slide = new Slide();
+        slide = new Slide(style);
         slide.setTitle("The third slide");
         slide.append(1, "To open a new presentation,");
         slide.append(2, "use File->Open from the menu.");
