@@ -19,7 +19,6 @@ public class Style {
 
 	public Style(){
 		styles = new HashMap<>();
-		loadDefaultStyle();
 	}
 
 	public void addStyle(int level, LevelStyle style){
@@ -29,18 +28,6 @@ public class Style {
 	public void removeStyle(int level){
 		styles.remove(level);
 	}
-
-	/**
-	 * Loads the default style
-	 */
-	public void loadDefaultStyle(){
-		styles.put(0, new LevelStyle("Helvetica", 0, Color.red,   48, 20));	// style voor item-level 0
-		styles.put(1, new LevelStyle("Helvetica",20, Color.blue,  40, 10));	// style voor item-level 1
-		styles.put(2, new LevelStyle("Helvetica",50, Color.black, 36, 10));	// style voor item-level 2
-		styles.put(3, new LevelStyle("Helvetica",70, Color.black, 30, 10));	// style voor item-level 3
-		styles.put(4, new LevelStyle("Helvetica",90, Color.black, 24, 10));	// style voor item-level 4
-	}
-
 	/**
 	 * Gets the Style from the styles map.
 	 * If the given level does not exist, fall back to another style in the map.
